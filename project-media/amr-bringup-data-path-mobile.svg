@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="2240" viewBox="0 0 900 2240" role="img" aria-labelledby="title desc">
+  <title id="title">AMR 기체 브링업 데이터 흐름 모바일판</title>
+  <desc id="desc">Raspberry Pi의 ROS 2 드라이버, 별도 USB 라이다, 양방향 UART 프레임, ESP32 펌웨어와 바퀴 및 센서의 연결을 한 열로 보여준다.</desc>
+  <defs>
+    <marker id="arrow-dark" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#12171c"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6b4a"/>
+    </marker>
+    <style>
+      .title { font: 700 52px "Wanted Sans", "Noto Sans KR", sans-serif; fill: #12171c; letter-spacing: -1px; }
+      .panel-title { font: 700 46px "Wanted Sans", "Noto Sans KR", sans-serif; fill: #12171c; }
+      .lead { font: 650 41px "Wanted Sans", "Noto Sans KR", sans-serif; fill: #2b3339; }
+      .body { font: 500 38px "Wanted Sans", "Noto Sans KR", sans-serif; fill: #2b3339; }
+      .small { font: 500 36px "Wanted Sans", "Noto Sans KR", sans-serif; fill: #556069; }
+      .mono { font: 600 36px "Martian Mono", "IBM Plex Mono", monospace; fill: #12171c; }
+      .green { fill: #1f6b4a; }
+      .panel { fill: #fafbfc; stroke: #12171c; stroke-width: 3; }
+      .soft { fill: #e3ebf1; stroke: #c2cfd9; stroke-width: 3; }
+      .subpanel { fill: #fafbfc; stroke: #c2cfd9; stroke-width: 3; }
+      .hardware { fill: #fafbfc; stroke: #7d8992; stroke-width: 3; }
+      .rule { stroke: #d3dae0; stroke-width: 3; }
+    </style>
+  </defs>
+
+  <rect width="900" height="2240" fill="#f5f7f9"/>
+  <text class="title" x="48" y="72">기체 브링업 데이터 흐름</text>
+  <line x1="48" y1="96" x2="852" y2="96" stroke="#12171c" stroke-width="4"/>
+
+  <rect class="panel" x="48" y="130" width="804" height="520"/>
+  <text class="panel-title" x="82" y="188">Raspberry Pi 4 · ROS 2</text>
+  <text class="lead" x="82" y="238">C++ base driver</text>
+  <line class="rule" x1="82" y1="264" x2="818" y2="264"/>
+
+  <rect class="soft" x="82" y="294" width="296" height="70" rx="4"/>
+  <text class="mono" x="108" y="341">/cmd_vel 입력</text>
+  <text class="body" x="82" y="410">차동구동 역기구학 · 비율 보존 포화</text>
+  <text class="small" x="82" y="457">실측  r 0.0329 m · b 0.1836 m</text>
+
+  <text class="lead" x="82" y="514">ROS 2 발행</text>
+  <text class="mono" x="82" y="557">/odom 50 Hz · TF 20 Hz</text>
+  <text class="mono" x="82" y="599">/imu/data_raw · /imu/mag 50 Hz</text>
+  <text class="mono" x="82" y="635">/battery_state 1 Hz</text>
+
+  <path d="M 450 700 V 650" fill="none" stroke="#1f6b4a" stroke-width="4" marker-end="url(#arrow-green)"/>
+  <rect class="hardware" x="48" y="702" width="804" height="150"/>
+  <text class="panel-title" x="82" y="760">YDLIDAR G4</text>
+  <text class="lead" x="82" y="811">USB → ROS 2 driver → /scan</text>
+
+  <rect class="soft" x="48" y="902" width="804" height="440" rx="4"/>
+  <text class="lead" text-anchor="middle" x="450" y="955">40핀 UART · /dev/ttyS0 · 115200</text>
+
+  <rect class="subpanel" x="82" y="988" width="736" height="140" rx="4"/>
+  <text class="lead" x="112" y="1037">명령 프레임 · 50 Hz</text>
+  <text class="small" x="112" y="1081">좌·우 목표속도 [counts/s]</text>
+  <text class="small" x="112" y="1118">STOP · REBOOT · CRC-8</text>
+  <line x1="782" y1="1018" x2="782" y2="1102" stroke="#12171c" stroke-width="5" marker-end="url(#arrow-dark)"/>
+
+  <rect class="subpanel" x="82" y="1150" width="736" height="160" rx="4"/>
+  <text class="lead green" x="112" y="1199">상태 프레임 · 50 Hz</text>
+  <text class="small green" x="112" y="1243">seq · 누적 엔코더 · 9축 IMU</text>
+  <text class="small green" x="112" y="1282">배터리 · flags · CRC-8</text>
+  <line x1="782" y1="1282" x2="782" y2="1180" stroke="#1f6b4a" stroke-width="5" marker-end="url(#arrow-green)"/>
+
+  <line x1="350" y1="1342" x2="350" y2="1384" stroke="#12171c" stroke-width="4" marker-end="url(#arrow-dark)"/>
+  <line x1="550" y1="1384" x2="550" y2="1342" stroke="#1f6b4a" stroke-width="4" marker-end="url(#arrow-green)"/>
+  <rect class="panel" x="48" y="1388" width="804" height="324"/>
+  <text class="panel-title" x="82" y="1446">ESP32 firmware v2</text>
+  <text class="lead" x="82" y="1496">프레임 파서 · 400 ms watchdog</text>
+  <line class="rule" x1="82" y1="1522" x2="818" y2="1522"/>
+  <text class="body" x="82" y="1572">부호 있는 좌·우 바퀴 지령</text>
+  <text class="body" x="82" y="1622">12-bit 엔코더 언랩 · 바이트 재동기</text>
+  <text class="body" x="82" y="1672">서보·IMU·전압 상태를 flags로 전송</text>
+
+  <path d="M 350 1712 V 1752" fill="none" stroke="#12171c" stroke-width="4" marker-end="url(#arrow-dark)"/>
+  <path d="M 550 1752 V 1712" fill="none" stroke="#1f6b4a" stroke-width="4" marker-end="url(#arrow-green)"/>
+  <rect class="hardware" x="48" y="1756" width="804" height="400"/>
+  <text class="panel-title" x="82" y="1814">구동부와 I²C 장치</text>
+  <line class="rule" x1="82" y1="1840" x2="818" y2="1840"/>
+
+  <text class="lead" x="82" y="1893">STS3215 ×2</text>
+  <text class="body" x="82" y="1943">속도 지령 ↓ · 12-bit 위치 ↑ · 서보 버스 1 Mbps</text>
+  <text class="small" x="82" y="1989">왼쪽 ID2 · 오른쪽 ID1</text>
+
+  <line class="rule" x1="82" y1="2020" x2="818" y2="2020"/>
+  <text class="lead" x="82" y="2074">센서값 ↑ · 상태 화면 ↓</text>
+  <text class="small" x="82" y="2120">QMI8658C · AK09918 · INA219 · SSD1306</text>
+</svg>
