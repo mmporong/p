@@ -4,6 +4,6 @@
 
 - 사이트: https://mmporong.github.io/p/
 - 원본 저장소: https://github.com/mmporong/portfolio-v2
-- 원본 커밋: `5ae03ec1ede9f078d3282bb8a12004586ba2373f`
+- 원본 커밋: `eabf5f26a6cd0f127d4b8b973656c6471b5bd801`
 
 이 저장소에는 공개 사이트에 필요한 정적 빌드만 둡니다.
